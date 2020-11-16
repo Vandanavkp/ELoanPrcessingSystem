@@ -1,17 +1,23 @@
 package com.iiht.evaluation.eloan.service;
 
+import com.iiht.evaluation.eloan.dao.ILoanDao;
+import com.iiht.evaluation.eloan.dao.LoanDaoImpl;
+import com.iiht.evaluation.eloan.exception.ELoanSystemException;
 import com.iiht.evaluation.eloan.model.LoanInfo;
 
 public class LoanServiceImpl implements ILoanService {
-
-	public LoanServiceImpl() {
-		// TODO Auto-generated constructor stub
-	}
+private ILoanDao loanDao;
+public LoanServiceImpl() {
+	this.loanDao=new LoanDaoImpl();
+}
 
 	@Override
-	public void applyLoan(LoanInfo loan1) {
-		// TODO Auto-generated method stub
-		
+	public LoanInfo createLoan(LoanInfo loan) throws ELoanSystemException {
+		if(loan!=null) {
+			loanDao.addLoan(loan);
+		}
+		return loan;
 	}
-
 }
+
+
