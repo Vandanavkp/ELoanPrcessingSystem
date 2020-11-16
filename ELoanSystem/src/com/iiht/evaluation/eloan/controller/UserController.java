@@ -136,9 +136,37 @@ public class UserController extends HttpServlet {
 			
 
 	private String placeloan(HttpServletRequest request, HttpServletResponse response) throws ELoanSystemException {
-		// TODO Auto-generated method stub
-	/* write the code to place the loan information */
-		return null;
+		String loanPur = request.getParameter("purpose");
+		int amtReq = Integer.parseInt(request.getParameter("amtrequest"));
+		String doa1 = request.getParameter("doa");
+		String busStructure = request.getParameter("bstructure");
+		String busIndicator = request.getParameter("bindicator");
+		String taxIndicator = request.getParameter("tindicator");
+		String address1 = request.getParameter("address");
+		String email1 = request.getParameter("email");
+		String mobile1 = request.getParameter("mobile");
+		request.setAttribute("status", "New");
+		String applNo1= null;
+		String view = "";
+		User user = new User();
+		String userName= user.getUsername();
+		if (loanPur == null || loanPur.isEmpty() || address1 == null || address1.isEmpty()) {
+			request.setAttribute("err", "Enter all details");
+			view = "application.jsp";
+			
+			} else {
+			LoanInfo loan1 = new LoanInfo(applNo1,userName,loanPur,amtReq,doa1,busStructure,busIndicator,taxIndicator,address1,email1,mobile1,"NEW");
+			try {
+				loanService.createLoan(loan1);
+				request.setAttribute("err", "Application created successfully!Please track approval status!");
+				view = "trackloan.jsp";						
+				}
+				catch (ELoanSystemException e) {
+				request.setAttribute("err","Cannot create application!");
+				view="errorPage.jsp";
+			}
+		}
+		return view;
 	}
 	private String editLoanProcess(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		// TODO Auto-generated method stub
