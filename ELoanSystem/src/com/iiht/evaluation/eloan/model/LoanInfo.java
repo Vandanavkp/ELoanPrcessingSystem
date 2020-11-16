@@ -22,7 +22,7 @@ public class LoanInfo {
 	 public LoanInfo() {
 		 
 	 }
-	 public LoanInfo(String applno, String username,String purpose, int amtrequest, String doa, String bstructure, String bindicator,
+	 public LoanInfo(String applno, String username,String purpose, int amtrequest, String doa, String bstructure, String bindicator,String tindicator,
 			String address, String email, String mobile,String status) {
 		super();
 		this.applno = applno;
